@@ -2,65 +2,28 @@ import api from './api.js';
 
 class OwnerService {
     async getAll() {
-        try {
-            const response = await api.get('/owners');
-            return { success: true, data: response.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener propietarios'
-            };
-        }
+        const response = await api.get('/owners');
+        return response.data;
     }
 
     async getById(id) {
-        try {
-            const response = await api.get(`/owners/${id}`);
-            return { success: true, data: response.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener propietario'
-            };
-        }
+        const response = await api.get(`/owners/${id}`);
+        return response.data;
     }
 
     async create(ownerData) {
-        try {
-            const response = await api.post('/owners', ownerData);
-            return { success: true, data: response.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al crear propietario',
-                errors: error.response?.data?.errors
-            };
-        }
+        const response = await api.post('/owners', ownerData);
+        return response.data;
     }
 
     async update(id, ownerData) {
-        try {
-            const response = await api.put(`/owners/${id}`, ownerData);
-            return { success: true, data: response.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al actualizar propietario',
-                errors: error.response?.data?.errors
-            };
-        }
+        const response = await api.put(`/owners/${id}`, ownerData);
+        return response.data;
     }
 
     async delete(id) {
-        try {
-            await api.delete(`/owners/${id}`);
-            return { success: true };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al eliminar propietario'
-            };
-        }
+        const response = await api.delete(`/owners/${id}`);
+        return response.data;
     }
 }
 

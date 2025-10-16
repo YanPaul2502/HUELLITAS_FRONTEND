@@ -2,77 +2,33 @@ import api from './api.js';
 
 class MedicalRecordService {
     async getAll() {
-        try {
-            const response = await api.get('/medical-records');
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener registros médicos'
-            };
-        }
+        const response = await api.get('/medical-records');
+        return response.data;
     }
 
     async getById(id) {
-        try {
-            const response = await api.get(`/medical-records/${id}`);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener registro médico'
-            };
-        }
+        const response = await api.get(`/medical-records/${id}`);
+        return response.data;
     }
 
     async getByPet(petId) {
-        try {
-            const response = await api.get(`/medical-records?pet_id=${petId}`);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener registros médicos de la mascota'
-            };
-        }
+        const response = await api.get(`/medical-records?pet_id=${petId}`);
+        return response.data;
     }
 
     async create(recordData) {
-        try {
-            const response = await api.post('/medical-records', recordData);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al crear registro médico',
-                errors: error.response?.data?.errors
-            };
-        }
+        const response = await api.post('/medical-records', recordData);
+        return response.data;
     }
 
     async update(id, recordData) {
-        try {
-            const response = await api.put(`/medical-records/${id}`, recordData);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al actualizar registro médico',
-                errors: error.response?.data?.errors
-            };
-        }
+        const response = await api.put(`/medical-records/${id}`, recordData);
+        return response.data;
     }
 
     async delete(id) {
-        try {
-            await api.delete(`/medical-records/${id}`);
-            return { success: true };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al eliminar registro médico'
-            };
-        }
+        const response = await api.delete(`/medical-records/${id}`);
+        return response.data;
     }
 }
 

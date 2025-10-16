@@ -2,89 +2,38 @@ import api from './api.js';
 
 class VaccinationService {
     async getAll() {
-        try {
-            const response = await api.get('/vaccinations');
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener vacunaciones'
-            };
-        }
+        const response = await api.get('/vaccinations');
+        return response.data;
     }
 
     async getById(id) {
-        try {
-            const response = await api.get(`/vaccinations/${id}`);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener vacunación'
-            };
-        }
+        const response = await api.get(`/vaccinations/${id}`);
+        return response.data;
     }
 
     async getByPet(petId) {
-        try {
-            const response = await api.get(`/vaccinations?pet_id=${petId}`);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener vacunaciones de la mascota'
-            };
-        }
+        const response = await api.get(`/vaccinations?pet_id=${petId}`);
+        return response.data;
     }
 
     async getDueVaccinations() {
-        try {
-            const response = await api.get('/vaccinations?status=due');
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al obtener vacunaciones pendientes'
-            };
-        }
+        const response = await api.get('/vaccinations?status=due');
+        return response.data;
     }
 
     async create(vaccinationData) {
-        try {
-            const response = await api.post('/vaccinations', vaccinationData);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al crear vacunación',
-                errors: error.response?.data?.errors
-            };
-        }
+        const response = await api.post('/vaccinations', vaccinationData);
+        return response.data;
     }
 
     async update(id, vaccinationData) {
-        try {
-            const response = await api.put(`/vaccinations/${id}`, vaccinationData);
-            return { success: true, data: response.data.data };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al actualizar vacunación',
-                errors: error.response?.data?.errors
-            };
-        }
+        const response = await api.put(`/vaccinations/${id}`, vaccinationData);
+        return response.data;
     }
 
     async delete(id) {
-        try {
-            await api.delete(`/vaccinations/${id}`);
-            return { success: true };
-        } catch (error) {
-            return {
-                success: false,
-                message: error.response?.data?.message || 'Error al eliminar vacunación'
-            };
-        }
+        const response = await api.delete(`/vaccinations/${id}`);
+        return response.data;
     }
 }
 

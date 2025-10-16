@@ -1,9 +1,11 @@
 <script>
     import { user, logout, hasRole, hasAnyRole } from '../stores/auth.js';
     import { showSuccess } from '../stores/notifications.js';
-    import { navigate } from 'svelte-routing';
+    import { navigate, link } from 'svelte-routing';
+    import { getContext } from 'svelte';
 
-    export let currentPath = '/dashboard';
+    const location = getContext('router');
+    $: currentPath = $location?.location?.pathname || '/';
 
     let sidebarOpen = false;
 
@@ -84,6 +86,7 @@
             {#each menuItems as item}
                 <a
                     href={item.path}
+                    use:link
                     class="nav-item"
                     class:active={isActive(item.path)}
                     on:click={closeSidebar}
@@ -143,7 +146,8 @@
 <style>
     .layout {
         display: flex;
-        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden;
         background-color: #f8fafc;
     }
 
@@ -162,6 +166,7 @@
         transition: transform 0.3s ease;
         z-index: 1000;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
     }
 
     .sidebar.open {
@@ -314,7 +319,9 @@
         display: flex;
         flex-direction: column;
         margin-left: 0;
-        transition: margin-left 0.3s ease;
+        height: 100vh;
+        overflow: hidden;
+        width: 100%;
     }
 
     .header {
@@ -325,6 +332,10 @@
         align-items: center;
         gap: 16px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        flex-shrink: 0;
     }
 
     .menu-toggle {
@@ -367,13 +378,17 @@
         flex: 1;
         padding: 24px;
         overflow-y: auto;
+        overflow-x: hidden;
+        height: calc(100vh - 73px);
     }
 
     /* Responsive */
     @media (min-width: 1024px) {
         .sidebar {
-            position: static;
+            position: fixed;
             transform: translateX(0);
+            width: 280px;
+            flex-shrink: 0;
         }
 
         .sidebar-close {
@@ -385,11 +400,26 @@
         }
 
         .main-content {
-            margin-left: 0;
+            margin-left: 280px;
+            width: calc(100% - 280px);
         }
 
         .sidebar-overlay {
             display: none;
+        }
+
+        .layout {
+            flex-direction: row;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .sidebar {
+            width: 280px;
+        }
+
+        .main-content {
+            width: 100%;
         }
     }
 
@@ -404,6 +434,37 @@
 
         .page-content {
             padding: 16px;
+        }
+
+        .sidebar {
+            width: 100%;
+            max-width: 320px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header {
+            padding: 12px 16px;
+        }
+
+        .header-title h1 {
+            font-size: 1.1rem;
+        }
+
+        .page-content {
+            padding: 12px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .nav-item {
+            padding: 14px 20px;
+        }
+
+        .nav-icon {
+            font-size: 20px;
         }
     }
 </style>
