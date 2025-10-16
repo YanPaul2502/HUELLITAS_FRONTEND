@@ -234,7 +234,7 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: 32px;
+        margin-bottom: 24px;
         gap: 20px;
     }
 
@@ -272,8 +272,8 @@
 
     .filters-section {
         display: flex;
-        gap: 20px;
-        margin-bottom: 32px;
+        gap: 16px;
+        margin-bottom: 24px;
         align-items: center;
         flex-wrap: wrap;
     }
@@ -369,7 +369,7 @@
     .records-list {
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 20px;
     }
 
     .record-card {

@@ -376,7 +376,7 @@
 
     .page-content {
         flex: 1;
-        padding: 24px;
+        padding: 20px;
         overflow-y: auto;
         overflow-x: hidden;
         height: calc(100vh - 73px);
@@ -433,7 +433,7 @@
         }
 
         .page-content {
-            padding: 16px;
+            padding: 12px;
         }
 
         .sidebar {
@@ -452,7 +452,7 @@
         }
 
         .page-content {
-            padding: 12px;
+            padding: 10px;
         }
 
         .sidebar-header h2 {
