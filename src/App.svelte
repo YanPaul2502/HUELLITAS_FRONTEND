@@ -18,8 +18,13 @@
   import MedicalRecords from './pages/MedicalRecords.svelte';
   import Vaccinations from './pages/Vaccinations.svelte';
   import NewOwner from './pages/NewOwner.svelte';
+  import OwnerDetails from './pages/OwnerDetails.svelte';
+  import EditOwner from './pages/EditOwner.svelte';
   import NewPet from './pages/NewPet.svelte';
   import NewAppointment from './pages/NewAppointment.svelte';
+  import NewVaccination from './pages/NewVaccination.svelte';
+  import VaccinationDetails from './pages/VaccinationDetails.svelte';
+  import EditVaccination from './pages/EditVaccination.svelte';
   
   onMount(() => {
     initAuth();
@@ -36,6 +41,12 @@
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/owners" component={Owners} />
         <Route path="/owners/new" component={NewOwner} />
+        <Route path="/owners/:id/edit" let:params>
+          <EditOwner id={params.id} />
+        </Route>
+        <Route path="/owners/:id" let:params>
+          <OwnerDetails id={params.id} />
+        </Route>
         <Route path="/pets" component={Pets} />
         <Route path="/pets/new" component={NewPet} />
         <Route path="/appointments" component={Appointments} />
@@ -43,6 +54,13 @@
         <Route path="/services" component={Services} />
         <Route path="/medical-records" component={MedicalRecords} />
         <Route path="/vaccinations" component={Vaccinations} />
+        <Route path="/vaccinations/new" component={NewVaccination} />
+        <Route path="/vaccinations/:id/edit" let:params>
+          <EditVaccination id={params.id} />
+        </Route>
+        <Route path="/vaccinations/:id" let:params>
+          <VaccinationDetails id={params.id} />
+        </Route>
       </Layout>
     </Router>
   {:else}

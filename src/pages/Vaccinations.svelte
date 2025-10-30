@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import { navigate } from 'svelte-routing';
     import { showError, showSuccess } from '../stores/notifications.js';
     import vaccinationsApi from '../services/vaccinations.js';
 
@@ -100,7 +101,7 @@
             <p>Control de vacunas y esquemas de inmunización</p>
         </div>
         <div class="header-actions">
-            <button class="btn-primary" on:click={() => window.location.href = '/vaccinations/new'}>
+            <button class="btn-primary" on:click={() => navigate('/vaccinations/new')}>
                 ➕ Nueva Vacunación
             </button>
         </div>
@@ -142,7 +143,7 @@
             <div class="empty-icon">💉</div>
             <h3>No hay vacunaciones registradas</h3>
             <p>Comienza agregando la primera vacunación</p>
-            <button class="btn-primary" on:click={() => window.location.href = '/vaccinations/new'}>
+            <button class="btn-primary" on:click={() => navigate('/vaccinations/new')}>
                 Agregar Vacunación
             </button>
         </div>
@@ -239,14 +240,14 @@
                     {/if}
 
                     <div class="vaccination-actions">
-                        <button class="btn-view" on:click={() => window.location.href = `/vaccinations/${vaccination.id}`}>
+                        <button class="btn-view" on:click={() => navigate(`/vaccinations/${vaccination.id}`)}>
                             Ver Detalles
                         </button>
-                        <button class="btn-edit" on:click={() => window.location.href = `/vaccinations/${vaccination.id}/edit`}>
+                        <button class="btn-edit" on:click={() => navigate(`/vaccinations/${vaccination.id}/edit`)}>
                             Editar
                         </button>
                         {#if vaccination.next_dose_date}
-                            <button class="btn-schedule" on:click={() => window.location.href = `/appointments/new?vaccination=${vaccination.id}`}>
+                            <button class="btn-schedule" on:click={() => navigate(`/appointments/new?vaccination=${vaccination.id}`)}>
                                 Agendar Próxima
                             </button>
                         {/if}
